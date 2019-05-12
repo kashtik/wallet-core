@@ -1,16 +1,12 @@
 package com.trustwallet.core.app.blockchains.eos
 
-import android.util.Log
-import com.google.common.base.Utf8
 import com.google.protobuf.ByteString
 import com.trustwallet.core.app.utils.toHexByteArray
 import org.junit.Assert.*
 import org.junit.Test
-import wallet.core.jni.proto.Bravo
 import org.json.JSONObject
 import wallet.core.jni.*
 import wallet.core.jni.proto.EOS
-import java.util.*
 
 
 class TestEOSSigning {
