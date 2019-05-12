@@ -17,7 +17,7 @@ class TestArkTransactionSigning{
     fun arkTransactionSigning(){
         val signingInput = ARK.SigningInput.newBuilder()
             .setAmount(1000000000)
-            .setPrivateKey(ByteString.copyFrom("0xd8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712"
+            .setPrivateKey(ByteString.copyFrom("d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712"
                 .toHexByteArray()))
             .setTimestamp(50686854)
             .setRecipientId("ANBkoGqWeTSiaEVgVzSKZd3jS7UWzv9PSo")

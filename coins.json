@@ -608,11 +608,12 @@
         "name": "ARK",
         "symbol": "ARK",
         "decimals": 8,
+        "blockchain": "Ark",
         "derivationPath": "m/44'/111'/0'/0/0",
         "curve": "secp256k1",
         "publicKeyType": "secp256k1",
         "base58Hasher": "sha256d",
-        "transactionPath": "/transaction/",
-        "explorer": "https://semux.info/explorer"
+        "transactionPath": "/api/transactions/",
+        "explorer": "https://explorer.ark.io"
     }
 ]

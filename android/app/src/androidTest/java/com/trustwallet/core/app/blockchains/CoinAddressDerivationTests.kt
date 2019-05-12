@@ -72,6 +72,6 @@ class CoinAddressDerivationTests {
         IOTEX -> assertEquals("io1qw9cccecw09q7p5kzyqtuhfhvah2mhfrc84jfk", address)
         ZILLIQA -> assertEquals("0xddb41006f7b6fa8e5fbf06a71c01f789febc66e8", address)
         SEMUX -> assertEquals("0xfe604170382452f77bc922bc19eb4b53504b09c2", address)
-        ARK -> assertEquals("AHBDhbbHyuSXA4Tvuz2jRYbEofbSvqXGBU", address)
+        ARK -> assertEquals("Ac49m5pu5YpMMNgEbSYeZUEpRMHcSK3DfV", address)
     }
 }
