@@ -1,6 +1,6 @@
 #include "../ARK/Address.h"
 
-#include <TrustWalletCore/TWArkAddress.h>
+#include <TrustWalletCore/TWARKAddress.h>
 #include <TrustWalletCore/TWHash.h>
 #include <TrustWalletCore/TWPublicKey.h>
 
