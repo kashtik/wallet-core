@@ -613,7 +613,7 @@
         "curve": "secp256k1",
         "publicKeyType": "secp256k1",
         "base58Hasher": "sha256d",
-        "transactionPath": "/api/transactions/",
+        "transactionPath": "/api/v2/transactions",
         "explorer": "https://explorer.ark.io"
     }
 ]

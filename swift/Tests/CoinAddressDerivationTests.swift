@@ -160,8 +160,6 @@ class CoinAddressDerivationTests: XCTestCase {
                 case .ark:
                     let expectedResult = "Ac49m5pu5YpMMNgEbSYeZUEpRMHcSK3DfV"
                     AssetCoinDerivation(coin, expectedResult, derivedAddress, address)
-                default:
-                    break
                 }
             }
         }

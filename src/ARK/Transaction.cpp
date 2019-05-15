@@ -1,3 +1,8 @@
+// Copyright © 2017-2019 Trust Wallet.
+//
+// This file is part of Trust. The full Trust copyright notice, including
+// terms governing use, modification, and redistribution, is contained in the
+// file LICENSE at the root of the source code distribution tree.
 #include "Transaction.h"
 #include "../Data.h"
 #include "../BinaryCoding.h"
@@ -12,19 +17,18 @@ using json = nlohmann::json;
 using namespace TW;
 
 ARK::Transaction::Transaction(){
-    type=0; // transfer
+    type = 0; // transfer
     fee = 10000000; // default fee
 }
 
-Data ARK::Transaction::to_bytes(){
+Data ARK::Transaction::encoded(){
     
     Data result = Data();
 
     // type should be 0 for transfer
     result.insert(result.end(), type);
 
-    // timestamp
-    encode32LE(timestamp, result);
+    encode32LE(timestamp, result);   
     
     append(result, publicKey);
 
@@ -43,12 +47,25 @@ Data ARK::Transaction::to_bytes(){
     return result;
 }
 
-std::string ARK::Transaction::to_json(){
+void ARK::Transaction::setTimestamp(uint32_t &timeInput){
+    if (timeInput > 1490101200){
+        // ark subracts that number from unix Tuesday, March 21, 2017 1:00:00 PM
+        timestamp = timeInput - 1490101200;
+    }else{
+        timestamp = timeInput;
+    }
+}
+
+uint32_t ARK::Transaction::getTimestamp(){
+    return timestamp;
+}
+
+std::string ARK::Transaction::toJson(){
     json j = {
         {"amount", amount},
         {"asset", {}},
         {"fee", fee},
-        {"id", hex(Hash::sha256(to_bytes()))},
+        {"id", hex(Hash::sha256(encoded()))},
         {"recipientId", recipientId.string()},
         {"senderPublicKey", hex(publicKey)},
         {"signature", hex(signature)},

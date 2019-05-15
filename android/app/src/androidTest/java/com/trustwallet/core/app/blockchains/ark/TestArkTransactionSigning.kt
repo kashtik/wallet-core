@@ -2,8 +2,7 @@ package com.trustwallet.core.app.blockchains.ark
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import com.google.protobuf.ByteString
-import com.trustwallet.core.app.utils.toHexByteArray
+import com.trustwallet.core.app.utils.toHexBytesInByteString
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import wallet.core.jni.ARKSigner
@@ -16,18 +15,18 @@ class TestArkTransactionSigning{
     @Test
     fun arkTransactionSigning(){
         val signingInput = ARK.SigningInput.newBuilder()
-            .setAmount(1000000000)
-            .setPrivateKey(ByteString.copyFrom("d8839c2432bfd0a67ef10a804ba991eabba19f154a3d707917681d45822a5712"
-                .toHexByteArray()))
-            .setTimestamp(50686854)
-            .setRecipientId("ANBkoGqWeTSiaEVgVzSKZd3jS7UWzv9PSo")
+            .setAmount(1000000)
+            .setPrivateKey("a76fa06ec56a720cdaa4b4764c7685833c7ffbcc03d193963c01d6890388376f".toHexBytesInByteString())
+            .setTimestamp(67855156)
+            .setRecipientId("AM5P17vdMPRscmyggkac6AgNp6CjUjLdwV")
+            .setFee(1500000)
             .build()
 
         val output = ARKSigner.sign(signingInput)
         val arkTransaction = Gson().fromJson(output.json, ArkTransaction::class.java)
 
-        assertEquals(arkTransaction.signature, "304402201ace9afcaf9d0ec64a31fd98c589767c76b5360d5b22dfe3cde2dfffdfef61dc022026d276a6140e6abbd80775541479cc71cf52590895bd24c0c577a9c57ecae581")
-        assertEquals(arkTransaction.senderPublicKey, "034151a3ec46b5670a682b0a63394f863587d1bc97483b1b6c70eb58e7f0aed192")
+        assertEquals(arkTransaction.signature, "3045022100cbe6803267d41803deef08ff150600101b1233468e212883d56739b491b1eb240220357bfa607eb1c2e9858cc6a55446ce6fe7556da9c90e61f14d8d5f86f9d306a4")
+        assertEquals(arkTransaction.senderPublicKey, "02ceb971ddabd391df62f4762ba45def3e2b36d002d8344ebbb4be9a941071c332")
 
     }
 

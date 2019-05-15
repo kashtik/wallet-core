@@ -1,3 +1,8 @@
+// Copyright © 2017-2019 Trust Wallet.
+//
+// This file is part of Trust. The full Trust copyright notice, including
+// terms governing use, modification, and redistribution, is contained in the
+// file LICENSE at the root of the source code distribution tree.
 #pragma once
 
 #include "../Data.h"
@@ -9,7 +14,6 @@ namespace TW::ARK {
     public:
       
       uint8_t type;
-      uint32_t timestamp;
       Data publicKey;
       Address recipientId;
       uint64_t amount;
@@ -21,7 +25,12 @@ namespace TW::ARK {
       Transaction();
 
       /// Encodes the transaction.
-      Data to_bytes();
-      std::string to_json();
+      Data encoded();
+      std::string toJson();
+      void setTimestamp(uint32_t &timestamp);
+      uint32_t getTimestamp();
+    
+    private:
+      uint32_t timestamp;
   };
 }

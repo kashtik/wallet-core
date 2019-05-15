@@ -1,3 +1,8 @@
+// Copyright © 2017-2019 Trust Wallet.
+//
+// This file is part of Trust. The full Trust copyright notice, including
+// terms governing use, modification, and redistribution, is contained in the
+// file LICENSE at the root of the source code distribution tree.
 #pragma once
 
 #include "../Data.h"
@@ -7,34 +12,33 @@
 
 namespace TW::ARK{
 
-    class Address{
+  class Address{
 
-        public:
-            std::string address;
-        
-            static bool isValid(const Data &data);
+    public:
+      static byte mainnetPrefix;
+      std::string address;
 
-            static bool isValid(const std::string &string);
+      static bool isValid(const Data &data);
 
-            Address(const std::string &string);
+      static bool isValid(const std::string &string);
 
-            Address(const Data &data);
+      Address(const std::string &string);
 
-            Address(const PublicKey &publicKey);
+      Address(const Data &data);
 
-            Address(){};
+      Address(const PublicKey &publicKey);
 
-            std::string string() const;
-            Data bytes();
+      Address(){};
 
-        
-    };
-    inline bool operator==(const Address& lhs, const Address& rhs) {
-        return lhs.address == rhs.address;
-    }
+      std::string string() const;
+      Data bytes();
+  };
+  inline bool operator==(const Address& lhs, const Address& rhs) {
+      return lhs.address == rhs.address;
+  }
 };
 
 // Wrapper for C interface.
 struct TWARKAddress {
-    TW::ARK::Address impl;
+  TW::ARK::Address impl;
 };

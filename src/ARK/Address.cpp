@@ -1,11 +1,19 @@
+// Copyright © 2017-2019 Trust Wallet.
+//
+// This file is part of Trust. The full Trust copyright notice, including
+// terms governing use, modification, and redistribution, is contained in the
+// file LICENSE at the root of the source code distribution tree.
 #include "Address.h"
 #include "../Base58.h"
 #include "../Hash.h"
+#include "../HexCoding.h"
 
 using namespace TW;
 
+byte TW::ARK::Address::mainnetPrefix = 0x17;
+
 bool TW::ARK::Address::isValid(const Data &data){
-    return isValid(Base58::bitcoin.encodeCheck(data));
+    return isValid(Base58::bitcoin.encode(data));
 }
 
 bool TW::ARK::Address::isValid(const std::string &string ){
@@ -16,7 +24,7 @@ bool TW::ARK::Address::isValid(const std::string &string ){
     }
     
     // mainnet
-    if (decoded[0]!=0x17){
+    if (decoded[0] != TW::ARK::Address::mainnetPrefix){
         return false;
     }
     
@@ -28,14 +36,14 @@ TW::ARK::Address::Address(const std::string &string){
 }
 
 TW::ARK::Address::Address(const Data &data){
-    address = Base58::bitcoin.encodeCheck(data);
+    address = Base58::bitcoin.encode(data);
 }
 
-TW::ARK::Address::Address(const PublicKey &pub){
+TW::ARK::Address::Address(const PublicKey &publicKey){
     Data hash = Data();
 
-    hash.insert(hash.end(), 0x17);
-    append(hash, Hash::ripemd(pub.bytes));
+    hash.insert(hash.end(), TW::ARK::Address::mainnetPrefix);
+    append(hash, Hash::ripemd(publicKey.bytes));
 
     address = Base58::bitcoin.encodeCheck(hash);
 }
@@ -45,6 +53,6 @@ std::string TW::ARK::Address::string() const{
 }
 
 Data TW::ARK::Address::bytes(){
-    return Base58::bitcoin.decodeCheck(address);
+    return Base58::bitcoin.decode(address);
 }
 
