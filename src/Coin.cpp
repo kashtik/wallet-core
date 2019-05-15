@@ -83,6 +83,7 @@ bool TW::validateAddress(TWCoinType coin, const std::string& string) {
     case TWCoinTypeIocoin:
         return Bitcoin::Address::isValid(string, {{TWP2PKHPrefixIocoin}, {TWP2SHPrefixIocoin}});
     case TWCoinTypeCallisto:
+    case TWCoinTypeEllaism:
     case TWCoinTypeEthereum:
     case TWCoinTypeEthereumClassic:
     case TWCoinTypeEthersocial:
@@ -93,6 +94,7 @@ bool TW::validateAddress(TWCoinType coin, const std::string& string) {
     case TWCoinTypeVeChain:
     case TWCoinTypeXDai:
     case TWCoinTypeTheta:
+    case TWCoinTypeDEXON:
         return Ethereum::Address::isValid(string);
 
     case TWCoinTypeEOS:
@@ -139,6 +141,7 @@ bool TW::validateAddress(TWCoinType coin, const std::string& string) {
     case TWCoinTypeZcoin:
         return Bitcoin::Address::isValid(string, {{TWP2PKHPrefixZcoin}, {TWP2SHPrefixZcoin}});
 
+    case TWCoinTypeZelcash:
     case TWCoinTypeZcash:
         return Zcash::TAddress::isValid(string, {{Zcash::TAddress::staticPrefix, TWP2PKHPrefixZcashT}, {Zcash::TAddress::staticPrefix, TWP2SHPrefixZcashT}});
 
@@ -208,6 +211,7 @@ std::string TW::deriveAddress(TWCoinType coin, const PublicKey& publicKey) {
         return Iocoin::Address(publicKey, TWP2PKHPrefixIocoin).string();
 
     case TWCoinTypeCallisto:
+    case TWCoinTypeEllaism:
     case TWCoinTypeEthereum:
     case TWCoinTypeEthereumClassic:
     case TWCoinTypeEthersocial:
@@ -218,6 +222,7 @@ std::string TW::deriveAddress(TWCoinType coin, const PublicKey& publicKey) {
     case TWCoinTypeVeChain:
     case TWCoinTypeXDai:
     case TWCoinTypeTheta:
+    case TWCoinTypeDEXON:
         return Ethereum::Address(publicKey).string();
 
     case TWCoinTypeEOS:
@@ -255,6 +260,7 @@ std::string TW::deriveAddress(TWCoinType coin, const PublicKey& publicKey) {
     case TWCoinTypeTron:
         return Tron::Address(publicKey).string();
 
+    case TWCoinTypeZelcash:
     case TWCoinTypeZcash:
         return Zcash::TAddress(publicKey, TWP2PKHPrefixZcashT).string();
 
